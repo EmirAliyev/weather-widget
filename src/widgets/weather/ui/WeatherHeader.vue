@@ -20,10 +20,26 @@ const emit = defineEmits<{
 
 <template>
   <header class="ww-header">
-    <div class="ww-header__title">{{ title }}</div>
-    <BaseButtonRound size="lg" @click="emit('toggle-config')">
-      <XSmIcon v-if="isConfig" width="12px" height="12px" />
-      <SvgIcon v-else icon="gear" stroke="white" pointer width="18px" height="18px"/>
+    <div class="ww-header__title">
+      {{ title }}
+    </div>
+    <BaseButtonRound
+      size="lg"
+      @click="emit('toggle-config')"
+    >
+      <XSmIcon
+        v-if="isConfig"
+        width="12px"
+        height="12px"
+      />
+      <SvgIcon
+        v-else
+        icon="gear"
+        stroke="white"
+        pointer
+        width="18px"
+        height="18px"
+      />
     </BaseButtonRound>
   </header>
 </template>

@@ -27,7 +27,7 @@ const emit = defineEmits<{
     :placeholder="placeholder"
     @blur="(e) => emit('blur', e)"
     @focus="(e) => emit('focus', e)"
-  />
+  >
 </template>
 
 <style scoped lang="scss">

@@ -17,7 +17,9 @@ withDefaults(defineProps<IProps>(), {
   <li class="ww-city">
     <div class="ww-city__header">
       <div class="ww-city__title-block">
-        <div class="ww-city__name">{{ city.name }}</div>
+        <div class="ww-city__name">
+          {{ city.name }}
+        </div>
         <div
           v-if="weather"
           class="ww-city__time"
@@ -38,7 +40,7 @@ withDefaults(defineProps<IProps>(), {
           :src="getIconUrl(weather)"
           alt="Weather icon"
           class="ww-city__icon"
-        />
+        >
         <div class="ww-city__temp-main">
           <span class="ww-city__temp">
             {{ formatTemp(weather.main.temp) }}

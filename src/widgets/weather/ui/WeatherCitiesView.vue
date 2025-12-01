@@ -22,16 +22,28 @@ withDefaults(defineProps<IProps>(), {
 
 <template>
   <section class="ww-main">
-    <div v-if="loading" class="ww-state ww-state--loading">
+    <div
+      v-if="loading"
+      class="ww-state ww-state--loading"
+    >
       <BaseSpinner label="Loading weather..." />
     </div>
-    <div v-else-if="error" class="ww-state ww-state--error">
+    <div
+      v-else-if="error"
+      class="ww-state ww-state--error"
+    >
       {{ error }}
     </div>
-    <div v-else-if="cities.length === 0" class="ww-state">
+    <div
+      v-else-if="cities.length === 0"
+      class="ww-state"
+    >
       No cities selected yet. Click the gear to configure.
     </div>
-    <ul v-else class="ww-cities">
+    <ul
+      v-else
+      class="ww-cities"
+    >
       <WeatherCity
         v-for="city in cities"
         :key="city.id"

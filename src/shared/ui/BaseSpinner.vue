@@ -11,7 +11,10 @@ withDefaults(defineProps<IProps>(), {
 <template>
   <div class="base-spinner">
     <span class="base-spinner__icon" />
-    <span v-if="label" class="base-spinner__label">
+    <span
+      v-if="label"
+      class="base-spinner__label"
+    >
       {{ label }}
     </span>
   </div>

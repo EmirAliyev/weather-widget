@@ -38,12 +38,18 @@ watch([loading, cities], () => {
 </script>
 
 <template>
-  <div class="ww-root" >
-    <div v-if="initialLoading" class="ww-loading">
+  <div class="ww-root">
+    <div
+      v-if="initialLoading"
+      class="ww-loading"
+    >
       <BaseSpinner label="Loading weather widget..." />
     </div>
     <template v-else>
-      <WeatherHeader :is-config="isConfig" @toggle-config="toggleConfig" />
+      <WeatherHeader
+        :is-config="isConfig"
+        @toggle-config="toggleConfig"
+      />
 
       <WeatherCitiesView
         v-if="!isConfig"

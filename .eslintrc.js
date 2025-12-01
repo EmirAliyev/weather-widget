@@ -23,7 +23,9 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'warn',
     '@typescript-eslint/no-unused-vars': 'warn',
     'vue/valid-define-props': 'off',
-    'vue/valid-define-emits': 'off'
+    'vue/valid-define-emits': 'off',
+    '@typescript-eslint/no-require-imports': 'off',
+    '@typescript-eslint/no-empty-object-type': 'off'
   },
   globals: {
     defineProps: 'readonly',
