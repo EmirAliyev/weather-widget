@@ -10,7 +10,6 @@ interface IProps {
   error?: string;
 }
 
-// eslint-disable-next-line vue/valid-define-props
 withDefaults(defineProps<IProps>(), {
   cities: () => [],
   cityWeather: () => ({}),

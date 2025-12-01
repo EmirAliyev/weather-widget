@@ -8,7 +8,6 @@ interface IProps {
   weather?: IWeatherData | null;
 }
 
-// eslint-disable-next-line vue/valid-define-props
 withDefaults(defineProps<IProps>(), {
   weather: null
 });

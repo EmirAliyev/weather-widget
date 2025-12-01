@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import WeatherHeader from '@/widgets/weather/ui/WeatherHeader.vue';
 import WeatherCitiesView from '@/widgets/weather/ui/WeatherCitiesView.vue';
 import WeatherConfigView from '@/widgets/weather/ui/WeatherConfigView.vue';
