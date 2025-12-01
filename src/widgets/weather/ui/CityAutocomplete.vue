@@ -1,24 +1,27 @@
-<script setup>
+<script setup lang="ts">
 import BaseAutocomplete from '@/shared/ui/BaseAutocomplete.vue';
+import type { ICitySuggestion } from '@/shared/model/types';
 
-const model = defineModel({
-  type: String,
+const model = defineModel<string>({
   default: ''
 });
 
-defineProps({
-  placeholder: {
-    type: String,
-    default: ''
-  },
-  suggestions: Array,
-  loading: {
-    type: Boolean,
-    default: false
-  }
+interface IProps {
+  placeholder?: string;
+  suggestions?: ICitySuggestion[];
+  loading?: boolean;
+}
+
+withDefaults(defineProps<IProps>(), {
+  placeholder: '',
+  suggestions: () => [],
+  loading: false
 });
 
-const emit = defineEmits(['input', 'select']);
+const emit = defineEmits<{
+  (e: 'input', value: string): void;
+  (e: 'select', item: ICitySuggestion): void;
+}>();
 
 </script>
 

@@ -1,21 +1,22 @@
-<script setup>
-const model = defineModel({
-  type: [String, Number],
+<script setup lang="ts">
+const model = defineModel<string | number>({
   default: ''
 });
 
-defineProps({
-  type: {
-    type: String,
-    default: 'text'
-  },
-  placeholder: {
-    type: String,
-    default: ''
-  }
+interface IProps {
+  type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url' | 'search';
+  placeholder?: string;
+}
+
+withDefaults(defineProps<IProps>(), {
+  type: 'text',
+  placeholder: ''
 });
 
-const emit = defineEmits(['blur', 'focus']);
+const emit = defineEmits<{
+  (e: 'blur', event: FocusEvent): void;
+  (e: 'focus', event: FocusEvent): void;
+}>();
 </script>
 
 <template>

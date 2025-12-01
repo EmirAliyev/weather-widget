@@ -1,30 +1,29 @@
-<script setup>
+<script setup lang="ts">
 import BaseInput from '@/shared/ui/BaseInput.vue';
 import BaseSpinner from '@/shared/ui/BaseSpinner.vue';
+import type { ICitySuggestion } from '@/shared/model/types';
 
-const model = defineModel({
-  type: String,
+const model = defineModel<string>({
   default: ''
 });
 
-defineProps({
-  placeholder: {
-    type: String,
-    default: ''
-  },
-  suggestions: {
-    type: Array,
-    default: () => []
-  },
-  loading: {
-    type: Boolean,
-    default: false
-  }
+interface IProps {
+  placeholder?: string;
+  suggestions?: ICitySuggestion[];
+  loading?: boolean;
+}
+
+withDefaults(defineProps<IProps>(), {
+  placeholder: '',
+  suggestions: () => [],
+  loading: false
 });
 
-const emit = defineEmits(['select']);
+const emit = defineEmits<{
+  (e: 'select', item: ICitySuggestion): void;
+}>();
 
-const onSelect = (item) => {
+const onSelect = (item: ICitySuggestion): void => {
   emit('select', item);
 };
 </script>

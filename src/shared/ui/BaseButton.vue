@@ -1,28 +1,20 @@
-<script setup>
-import { computed } from 'vue';
+<script setup lang="ts">
 import BaseSpinner from '@/shared/ui/BaseSpinner.vue';
 
-const props = defineProps({
-  type: {
-    type: String,
-    default: 'button'
-  },
-  loading: {
-    type: Boolean,
-    default: false
-  },
-  disabled: {
-    type: Boolean,
-    default: false
-  },
-  maxWidth: {
-    type: [String, Number],
-    default: null
-  },
-  fullWidth: {
-    type: Boolean,
-    default: false
-  }
+interface IProps {
+  type?: 'button' | 'submit' | 'reset';
+  loading?: boolean;
+  disabled?: boolean;
+  maxWidth?: string | number | null;
+  fullWidth?: boolean;
+}
+
+const props = withDefaults(defineProps<IProps>(), {
+  type: 'button',
+  loading: false,
+  disabled: false,
+  maxWidth: null,
+  fullWidth: false
 });
 
 const buttonStyles = computed(() => {

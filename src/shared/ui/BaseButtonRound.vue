@@ -1,28 +1,23 @@
-<script setup>
-import { computed } from 'vue';
+<script setup lang="ts">
 import BaseSpinner from '@/shared/ui/BaseSpinner.vue';
 
-const props = defineProps({
-  type: {
-    type: String,
-    default: 'button'
-  },
-  disabled: {
-    type: Boolean,
-    default: false
-  },
-  loading: {
-    type: Boolean,
-    default: false
-  },
-  size: {
-    type: String,
-    default: 'md',
-    validator: (value) => ['sm', 'md', 'lg', 'xl'].includes(value)
-  }
+type ButtonSize = 'sm' | 'md' | 'lg' | 'xl';
+
+interface IProps {
+  type?: 'button' | 'submit' | 'reset';
+  disabled?: boolean;
+  loading?: boolean;
+  size?: ButtonSize;
+}
+
+const props = withDefaults(defineProps<IProps>(), {
+  type: 'button',
+  disabled: false,
+  loading: false,
+  size: 'md'
 });
 
-const getSizeValue = (size) => {
+const getSizeValue = (size: ButtonSize): string => {
   switch (size) {
     case 'sm':
       return '18px';

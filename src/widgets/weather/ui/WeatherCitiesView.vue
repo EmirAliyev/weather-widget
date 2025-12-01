@@ -1,25 +1,24 @@
-<script setup>
+<script setup lang="ts">
 import BaseSpinner from '@/shared/ui/BaseSpinner.vue';
 import WeatherCity from '@/widgets/weather/ui/WeatherCity.vue';
+import type { ICity, CityWeather } from '@/shared/model/types';
 
-defineProps({
-  cities: {
-    type: Array,
-    default: () => []
-  },
-  cityWeather: {
-    type: Object,
-    default: () => ({})
-  },
-  loading: {
-    type: Boolean,
-    default: false
-  },
-  error: {
-    type: String,
-    default: ''
-  },
+interface IProps {
+  cities?: ICity[];
+  cityWeather?: CityWeather;
+  loading?: boolean;
+  error?: string;
+}
+
+// eslint-disable-next-line vue/valid-define-props
+withDefaults(defineProps<IProps>(), {
+  cities: () => [],
+  cityWeather: () => ({}),
+  loading: false,
+  error: ''
 });
+
+
 </script>
 
 <template>

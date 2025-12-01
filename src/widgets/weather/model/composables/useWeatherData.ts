@@ -1,4 +1,4 @@
-import { ref, type Ref } from 'vue';
+import type { Ref } from 'vue';
 import { weatherApi } from '@/shared/api';
 import type { IWeatherData, ICity, CityWeather, IWeatherDataState } from '@/shared/model/types';
 

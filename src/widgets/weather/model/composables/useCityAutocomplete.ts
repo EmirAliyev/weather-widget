@@ -1,4 +1,4 @@
-import { ref, watch, type Ref } from 'vue';
+import type { Ref } from 'vue';
 import { weatherApi } from '@/shared/api';
 import type { ICitySuggestion } from '@/shared/model/types';
 import { TIMINGS } from '@/widgets/weather/model/lib/constants/timings';

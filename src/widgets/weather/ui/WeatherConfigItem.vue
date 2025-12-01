@@ -3,28 +3,15 @@ import BaseButtonRound from '@/shared/ui/BaseButtonRound.vue';
 import XSmIcon from '@/assets/icons/x-sm.svg';
 import type { ICity } from '@/shared/model/types';
 
-defineProps({
-  city: {
-    type: Object as () => ICity,
-    required: true
-  },
-  index: {
-    type: Number,
-    required: true
-  },
-  onDragStart: {
-    type: Function as () => (index: number, event: DragEvent) => void,
-    required: true
-  },
-  onDrop: {
-    type: Function as () => (index: number) => void,
-    required: true
-  },
-  onRemove: {
-    type: Function as () => (id: string) => void,
-    required: true
-  }
-});
+interface IProps {
+  city: ICity;
+  index: number;
+  onDragStart: (index: number, event: DragEvent) => void;
+  onDrop: (index: number) => void;
+  onRemove: (id: string) => void;
+}
+
+defineProps<IProps>();
 </script>
 
 <template>

@@ -1,4 +1,4 @@
-import { watch, type Ref } from 'vue';
+import type { Ref } from 'vue';
 import type { ICity, IConfigState, CityWeather } from '@/shared/model/types';
 import { useCityAutocomplete } from '@/widgets/weather/model/composables/useCityAutocomplete';
 import { useCityForm } from '@/widgets/weather/model/composables/useCityForm';

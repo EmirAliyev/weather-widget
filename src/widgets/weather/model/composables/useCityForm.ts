@@ -1,4 +1,4 @@
-import { ref, type Ref } from 'vue';
+import type { Ref } from 'vue';
 import { weatherApi } from '@/shared/api';
 import type { ICity, CityWeather } from '@/shared/model/types';
 import { ConfigErrorMessages } from '@/widgets/weather/model/lib/constants/error-config';

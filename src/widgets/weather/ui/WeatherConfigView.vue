@@ -1,50 +1,33 @@
 <script setup lang="ts">
-import { computed, type PropType } from 'vue';
 import CityAutocomplete from '@/widgets/weather/ui/CityAutocomplete.vue';
 import WeatherConfigItem from '@/widgets/weather/ui/WeatherConfigItem.vue';
 import BaseButton from '@/shared/ui/BaseButton.vue';
 import { ICity, ICitySuggestion } from '@/shared/model/types';
 
-const props = defineProps({
-  cities: {
-    type: Array as PropType<ICity[]>,
-    default: () => []
-  },
-  citySuggestions: {
-    type: Array as PropType<ICitySuggestion[]>,
-    default: () => []
-  },
-  suggestLoading: {
-    type: Boolean,
-    default: false
-  },
-  configError: {
-    type: String,
-    default: ''
-  },
-  newCity: {
-    type: String,
-    default: ''
-  },
-  removeCity: {
-    type: Function as PropType<(id: string) => void>,
-    required: true
-  },
-  onDragStart: {
-    type: Function as PropType<(index: number, event: DragEvent) => void>,
-    required: true
-  },
-  onDrop: {
-    type: Function as PropType<(index: number) => void>,
-    required: true
-  }
+interface IProps {
+  cities?: ICity[];
+  citySuggestions?: ICitySuggestion[];
+  suggestLoading?: boolean;
+  configError?: string;
+  newCity?: string;
+  removeCity: (id: string) => void;
+  onDragStart: (index: number, event: DragEvent) => void;
+  onDrop: (index: number) => void;
+}
+
+const props = withDefaults(defineProps<IProps>(), {
+  cities: () => [],
+  citySuggestions: () => [],
+  suggestLoading: false,
+  configError: '',
+  newCity: ''
 });
 
-const emit = defineEmits([
-  'update:newCity',
-  'add-city',
-  'select-suggestion'
-]);
+const emit = defineEmits<{
+  (e: 'update:newCity', value: string): void;
+  (e: 'add-city'): void;
+  (e: 'select-suggestion', item: ICitySuggestion): void;
+}>();
 
 const newCityModel = computed({
   get: () => props.newCity,

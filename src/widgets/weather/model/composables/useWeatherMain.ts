@@ -1,4 +1,3 @@
-import { ref } from 'vue';
 import { useWeatherStorage } from '@/widgets/weather/model/composables/useWeatherStorage';
 import { useWeatherData } from '@/widgets/weather/model/composables/useWeatherData';
 import { useWeatherConfig } from '@/widgets/weather/model/composables/useWeatherConfig';

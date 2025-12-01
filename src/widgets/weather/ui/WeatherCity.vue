@@ -1,16 +1,16 @@
-<script setup>
+<script setup lang="ts">
 import { WEATHER_EXTRA_FIELDS } from '@/widgets/weather/model/lib/constants/extraFields';
 import { formatTemp, formatTime, getIconUrl } from '@/widgets/weather/model/lib/helpers/formatting';
+import type { ICity, IWeatherData } from '@/shared/model/types';
 
-defineProps({
-  city: {
-    type: Object,
-    required: true
-  },
-  weather: {
-    type: Object,
-    default: null
-  }
+interface IProps {
+  city: ICity;
+  weather?: IWeatherData | null;
+}
+
+// eslint-disable-next-line vue/valid-define-props
+withDefaults(defineProps<IProps>(), {
+  weather: null
 });
 </script>
 

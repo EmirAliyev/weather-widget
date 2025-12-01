@@ -1,4 +1,4 @@
-import { ref, type Ref } from 'vue';
+import type { Ref } from 'vue';
 import type { ICity, CityWeather } from '@/shared/model/types';
 
 export interface ICityListState {

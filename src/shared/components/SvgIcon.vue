@@ -1,33 +1,22 @@
-<script setup>
+<script setup lang="ts">
+interface IProps {
+  icon: string;
+  width?: string | number;
+  height?: string | number;
+  color?: string | null;
+  stroke?: string | null;
+  pointer?: boolean;
+}
 
-const props = defineProps({
-  icon: {
-    type: String,
-    required: true
-  },
-  width: {
-    type: [String, Number],
-    default: 16
-  },
-  height: {
-    type: [String, Number],
-    default: 16
-  },
-  color: {
-    type: String,
-    default: null
-  },
-  stroke: {
-    type: String,
-    default: null
-  },
-  pointer: {
-    type: Boolean,
-    default: false
-  }
+const props = withDefaults(defineProps<IProps>(), {
+  width: 16,
+  height: 16,
+  color: null,
+  stroke: null,
+  pointer: false
 });
 
-const iconRef = shallowRef(null);
+const iconRef = shallowRef<unknown>(null);
 
 onMounted(async () => {
   const { default: svg } = await import(`../../assets/icons/${props.icon}.svg`);

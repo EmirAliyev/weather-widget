@@ -1,5 +1,4 @@
 <script setup>
-import { onMounted, ref, watch } from 'vue';
 import WeatherHeader from '@/widgets/weather/ui/WeatherHeader.vue';
 import WeatherCitiesView from '@/widgets/weather/ui/WeatherCitiesView.vue';
 import WeatherConfigView from '@/widgets/weather/ui/WeatherConfigView.vue';

@@ -1,20 +1,21 @@
-<script setup>
+<script setup lang="ts">
 import SvgIcon from '@/shared/components/SvgIcon.vue';
 import BaseButtonRound from '@/shared/ui/BaseButtonRound.vue';
 import XSmIcon from '@/assets/icons/x-sm.svg';
 
-defineProps({
-  title: {
-    type: String,
-    default: 'Weather'
-  },
-  isConfig: {
-    type: Boolean,
-    default: false
-  }
+interface IProps {
+  title?: string;
+  isConfig?: boolean;
+}
+
+withDefaults(defineProps<IProps>(), {
+  title: 'Weather',
+  isConfig: false
 });
 
-const emit = defineEmits(['toggle-config']);
+const emit = defineEmits<{
+  (e: 'toggle-config'): void;
+}>();
 </script>
 
 <template>

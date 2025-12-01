@@ -1,4 +1,3 @@
-import { ref } from 'vue';
 import { storageAdapter } from '@/shared/model/lib/storage';
 import { WEATHER_STORAGE_KEY } from '@/widgets/weather/model/lib/constants/storage';
 import type { ICitiesState, ICity } from '@/shared/model/types';

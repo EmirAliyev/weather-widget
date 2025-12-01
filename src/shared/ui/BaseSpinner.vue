@@ -1,9 +1,10 @@
-<script setup>
-defineProps({
-  label: {
-    type: String,
-    default: ''
-  }
+<script setup lang="ts">
+interface IProps {
+  label?: string;
+}
+
+withDefaults(defineProps<IProps>(), {
+  label: ''
 });
 </script>
 
