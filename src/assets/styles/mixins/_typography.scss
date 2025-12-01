@@ -1,0 +1,53 @@
+@mixin textBase(
+  $size: 1rem,
+  $weight: 400,
+  $line-height: 1.4,
+  $color: inherit
+) {
+  font-size: $size;
+  font-weight: $weight;
+  line-height: $line-height;
+  color: $color;
+}
+
+@mixin textSmall($color: inherit) {
+  @include textBase(0.8125rem, 400, 1.4, $color);
+}
+
+@mixin textLarge($color: inherit) {
+  @include textBase(1.5rem, 400, 1.4, $color);
+}
+
+
+
+
+
+@mixin textHeading(
+  $size: 1.25rem,
+  $weight: 600,
+  $line-height: 1.3,
+  $color: inherit,
+  $transform: none,
+  $spacing: 0
+) {
+  font-size: $size;
+  font-weight: $weight;
+  line-height: $line-height;
+  color: $color;
+  text-transform: $transform;
+  letter-spacing: $spacing;
+}
+
+@mixin headingSmall($color: inherit) {
+  @include textHeading(0.8125rem, 600, 1.4, $color, uppercase, 0.06em);
+}
+
+@mixin headingBase($color: inherit) {
+  @include textHeading(0.9375rem, 600, 1.4, $color, uppercase, 0.08em);
+}
+
+@mixin headingLarge($color: inherit) {
+  @include textHeading(1.375rem, 600, 1.3, $color);
+}
+
+

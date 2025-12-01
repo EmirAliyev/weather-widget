@@ -1,0 +1,2 @@
+export { storageAdapter } from './storageAdapter';
+

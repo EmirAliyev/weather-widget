@@ -1,0 +1,5 @@
+export const TIMINGS = {
+  CITY_SUGGESTION_DEBOUNCE_MS: 400,
+  GEOLOCATION_TIMEOUT_MS: 8000
+} as const;
+
