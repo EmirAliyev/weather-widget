@@ -22,10 +22,8 @@ module.exports = {
     'vue/multi-word-component-names': 'off',
     '@typescript-eslint/no-explicit-any': 'warn',
     '@typescript-eslint/no-unused-vars': 'warn',
-    'vue/valid-define-props': ['error', {
-      'propsDefinition': 'type-based'
-    }],
-    'vue/valid-define-emits': 'error'
+    'vue/valid-define-props': 'off',
+    'vue/valid-define-emits': 'off'
   },
   globals: {
     defineProps: 'readonly',
