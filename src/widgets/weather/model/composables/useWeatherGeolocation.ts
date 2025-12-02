@@ -1,7 +1,6 @@
 import type { Ref } from 'vue';
 import type { ICity, CityWeather } from '@/shared/model/types';
-import { weatherApi } from '@/shared/api';
-import { TIMINGS } from '@/widgets/weather/model/lib/constants/timings';
+import { weatherApi, ipGeolocationApi } from '@/shared/api';
 
 import type { IWeatherData } from '@/shared/model/types';
 
@@ -10,78 +9,53 @@ export function useWeatherGeolocation(
   fetchCityByCoords: (latitude: number, longitude: number) => Promise<IWeatherData | null>,
   persistToStorage: () => void,
   cityWeather: Ref<CityWeather>,
-  loading: Ref<boolean>
+  loading: Ref<boolean>,
+  error: Ref<string>
 ) {
-  const initWithGeolocation = () => {
-    if (!navigator.geolocation) {
-      return;
-    }
+  const initWithGeolocation = async () => {
     loading.value = true;
-    navigator.geolocation.getCurrentPosition(
-      async (pos) => {
-        const { latitude, longitude } = pos.coords;
+    error.value = '';
 
+    try {
+      const location = await ipGeolocationApi.getLocationByIp();
+      const { lat, lon, city: ipCity } = location;
+
+      if (ipCity) {
         try {
-          const geocodeResults = await weatherApi.reverseGeocode(latitude, longitude, 1);
-
-          if (geocodeResults && geocodeResults.length > 0) {
-            const location = geocodeResults[0];
-            const cityName = location.name;
-
-            const weatherData = await weatherApi.getWeatherByCity(cityName);
-
-            if (weatherData) {
-              const cityObj: ICity = {
-                id: cityName.toLowerCase().replace(/\s+/g, '-'),
-                name: cityName
-              };
-              cities.value = [cityObj];
-              persistToStorage();
-              cityWeather.value = { [cityObj.id]: weatherData };
-            }
-          } else {
-            const data = await fetchCityByCoords(latitude, longitude);
-            if (data) {
-              const cityName = data.name;
-              const cityObj: ICity = {
-                id: cityName.toLowerCase().replace(/\s+/g, '-'),
-                name: cityName
-              };
-              cities.value = [cityObj];
-              persistToStorage();
-              cityWeather.value = { [cityObj.id]: data };
-            }
+          const weatherData = await weatherApi.getWeatherByCity(ipCity);
+          if (weatherData) {
+            const cityObj: ICity = {
+              id: ipCity.toLowerCase().replace(/\s+/g, '-'),
+              name: ipCity
+            };
+            cities.value = [cityObj];
+            persistToStorage();
+            cityWeather.value = { [cityObj.id]: weatherData };
+            loading.value = false;
+            return;
           }
         } catch {
-          try {
-            const data = await fetchCityByCoords(latitude, longitude);
-            if (data) {
-              const cityName = data.name;
-              const cityObj: ICity = {
-                id: cityName.toLowerCase().replace(/\s+/g, '-'),
-                name: cityName
-              };
-              cities.value = [cityObj];
-              persistToStorage();
-              cityWeather.value = { [cityObj.id]: data };
-            }
-          } catch (fallbackError) {
-            void fallbackError;
-          }
-        } finally {
-          loading.value = false;
+          void 0;
         }
-      },
-      (error) => {
-        void error;
-        loading.value = false;
-      },
-      {
-        enableHighAccuracy: true,
-        timeout: TIMINGS.GEOLOCATION_TIMEOUT_MS,
-        maximumAge: 0
       }
-    );
+
+      const data = await fetchCityByCoords(lat, lon);
+      if (data) {
+        const cityName = data.name;
+        const cityObj: ICity = {
+          id: cityName.toLowerCase().replace(/\s+/g, '-'),
+          name: cityName
+        };
+        cities.value = [cityObj];
+        persistToStorage();
+        cityWeather.value = { [cityObj.id]: data };
+      }
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Unable to get your location.';
+      error.value = errorMessage;
+    } finally {
+      loading.value = false;
+    }
   };
 
   return {

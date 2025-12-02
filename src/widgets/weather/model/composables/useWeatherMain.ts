@@ -8,7 +8,7 @@ export function useWeatherWidget(): IWeatherWidgetState {
   const storage = useWeatherStorage();
   const data = useWeatherData(storage.cities);
   const config = useWeatherConfig(storage.cities, data.cityWeather, storage.persistToStorage, data.fetchAllWeather);
-  const geolocation = useWeatherGeolocation(storage.cities, data.fetchCityByCoords, storage.persistToStorage, data.cityWeather, data.loading);
+  const geolocation = useWeatherGeolocation(storage.cities, data.fetchCityByCoords, storage.persistToStorage, data.cityWeather, data.loading, data.error);
 
   const isConfig = ref(false);
 
