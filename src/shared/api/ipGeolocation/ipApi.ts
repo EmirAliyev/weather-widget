@@ -5,18 +5,15 @@ export class IpGeolocationApi {
   private readonly baseURL: string;
 
   constructor(baseURL?: string) {
-    this.baseURL = baseURL || process.env.VUE_APP_IP_GEOLOCATION_BASE_URL || 'http://ip-api.com';
+    this.baseURL = baseURL || process.env.VUE_APP_IP_GEOLOCATION_BASE_URL || 'https://ipapi.co';
   }
 
   async getLocationByIp(query?: string): Promise<{ lat: number; lon: number; city?: string }> {
     try {
-      const path = query ? `/json/${query}` : '/json';
+      const path = query ? `/${query}/json` : '/json';
       const url = `${this.baseURL}${path}`;
 
       const response = await axios.get<IIpGeolocationResponse>(url, {
-        params: {
-          fields: 'status,message,lat,lon,city'
-        },
         timeout: 10000
       });
 
