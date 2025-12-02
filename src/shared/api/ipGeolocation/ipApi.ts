@@ -19,17 +19,20 @@ export class IpGeolocationApi {
 
       const data = response.data;
 
-      if (data.status === 'fail') {
-        throw new Error(data.message || 'Failed to get location by IP');
+      if (data.error) {
+        throw new Error(data.reason || 'Failed to get location by IP');
       }
 
-      if (!data.lat || !data.lon) {
+      const lat = data.latitude ?? data.lat;
+      const lon = data.longitude ?? data.lon;
+
+      if (!lat || !lon) {
         throw new Error('Location coordinates not available');
       }
 
       return {
-        lat: data.lat,
-        lon: data.lon,
+        lat,
+        lon,
         city: data.city
       };
     } catch (error) {
@@ -40,4 +43,3 @@ export class IpGeolocationApi {
     }
   }
 }
-
